@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String?
+  name         String?
+  googleId     String?   @unique
+  aiMessages   Int       @default(5)
+  lastAiReset  DateTime  @default(now())
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  resumes      Resume[]
+  payments     Payment[]
+  aiLogs       AiLog[]
+}
+
+model Resume {
+  id             String          @id @default(cuid())
+  userId         String
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title          String          @default("Untitled Resume")
+  jobRole        String?
+  resumeData     Json
+  templateId     String?
+  atsScore       Int?
+  status         String          @default("draft")
+  versionNumber  Int             @default(1)
+  parentResumeId String?
+  isPublic       Boolean         @default(false)
+  publicSlug     String?         @unique
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  payments       Payment[]
+  versions       ResumeVersion[]
+}
+
+model ResumeVersion {
+  id        String   @id @default(cuid())
+  resumeId  String
+  resume    Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+  data      Json
+  version   Int
+  createdAt DateTime @default(now())
+}
+
+model Template {
+  id           String   @id @default(cuid())
+  name         String
+  category     String
+  previewUrl   String
+  htmlTemplate String
+  cssStyles    String
+  isPremium    Boolean  @default(false)
+  suitableFor  Json
+  sortOrder    Int      @default(0)
+}
+
+model Payment {
+  id                String   @id @default(cuid())
+  userId            String
+  user              User     @relation(fields: [userId], references: [id])
+  resumeId          String?
+  resume            Resume?  @relation(fields: [resumeId], references: [id])
+  amount            Int
+  currency          String   @default("INR")
+  razorpayOrderId   String   @unique
+  razorpayPaymentId String?
+  status            String   @default("pending")
+  actionType        String
+  createdAt         DateTime @default(now())
+}
+
+model AiLog {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+  resumeId     String?
+  actionType   String
+  inputTokens  Int
+  outputTokens Int
+  costPaise    Int
+  createdAt    DateTime @default(now())
+}

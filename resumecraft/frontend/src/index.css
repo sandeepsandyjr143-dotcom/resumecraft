@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground; font-family: 'Inter', system-ui, sans-serif; }
+}
+
+/* Resume preview styles */
+.resume-preview {
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.resume-preview h1 { font-size: 20px; font-weight: bold; text-align: center; }
+.resume-preview .contact { text-align: center; font-size: 10px; color: #555; margin: 4px 0 12px; }
+.resume-preview .section { margin-bottom: 12px; }
+.resume-preview .section-title { 
+  font-size: 11px; font-weight: bold; text-transform: uppercase; 
+  letter-spacing: 1px; border-bottom: 1.5px solid #333; 
+  padding-bottom: 2px; margin-bottom: 6px; 
+}
+.resume-preview .job-title { font-weight: bold; }
+.resume-preview ul { padding-left: 14px; }
+.resume-preview ul li { margin-bottom: 1px; font-size: 10px; }
+.resume-preview .skill-tag { 
+  display: inline-block; background: #f0f0f0; 
+  padding: 1px 6px; border-radius: 3px; margin: 2px; font-size: 9px; 
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
