@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Target, AlertCircle, CheckCircle, RefreshCw } from 'lucide-react';
-import api from '../utils/api';
+import api from "../../utils/api";
 
 export default function ATSScore({ resumeData, jobRole, resumeId }) {
   const [score, setScore] = useState(null);
