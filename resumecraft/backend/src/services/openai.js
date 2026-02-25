@@ -1,6 +1,6 @@
 const OpenAI = require('openai');
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const openai = null;
 const MODEL  = process.env.OPENAI_MODEL || 'gpt-4o-mini'; // mini = cheaper, still great
 
 async function callAI(systemPrompt, userContent, logData = {}) {
@@ -96,15 +96,10 @@ async function chatAssistant(message, resumeData, _ignored, userId, resumeId) {
 You can see their resume. When asked to make changes, return the updated field.
 Return ONLY JSON: {"message":"your reply","action":"update|none","field":"summary|experience|skills|achievements|personal|education|projects|certifications|null","value":<new content or null>,"resumeData":<full updated resume if action=update, else null>}`;
 
-  const response = await openai.chat.completions.create({
-    model: MODEL,
-    messages: [
-      { role: 'system', content: sys },
-      { role: 'user',   content: `Resume:\n${JSON.stringify(resumeData, null, 2)}\n\nQuestion: ${message}` }
-    ],
-    temperature: 0.7,
-    max_tokens: 2000   // smaller cap = cheaper per chat
-  });
+  async function callAI() {
+  return "AI feature disabled for now";
+}
+    
 
   const content = response.choices[0].message.content;
   if (userId) {

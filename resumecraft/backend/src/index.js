@@ -7,7 +7,6 @@ const authRoutes    = require('./routes/auth');
 const resumeRoutes  = require('./routes/resumes');
 const aiRoutes      = require('./routes/ai');
 const templateRoutes= require('./routes/templates');
-const paymentRoutes = require('./routes/payments');
 const exportRoutes  = require('./routes/export');
 
 const app    = express();
@@ -31,7 +30,6 @@ app.use('/api/auth',      authRoutes);
 app.use('/api/resumes',   resumeRoutes);
 app.use('/api/ai',        aiRoutes);
 app.use('/api/templates', templateRoutes);
-app.use('/api/payments',  paymentRoutes);
 app.use('/api/export',    exportRoutes);
 
 app.use((err, req, res, next) => {
