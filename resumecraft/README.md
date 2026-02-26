@@ -4,7 +4,7 @@
 ---
 
 ## What's inside
-
+gi
 ```
 resumecraft/
 ├── backend/          ← Node.js + Express (deploy to Render)
